@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		C0E9141A2C9021F2000B2E90 /* NavigationRouterDestinationTestsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E914192C9021F2000B2E90 /* NavigationRouterDestinationTestsApp.swift */; };
 		C0E9141C2C9021F2000B2E90 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9141B2C9021F2000B2E90 /* ContentView.swift */; };
-		C0E9141E2C9021F2000B2E90 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9141D2C9021F2000B2E90 /* Item.swift */; };
 		C0E914202C9021F3000B2E90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0E9141F2C9021F3000B2E90 /* Assets.xcassets */; };
 		C0E914232C9021F3000B2E90 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0E914222C9021F3000B2E90 /* Preview Assets.xcassets */; };
 		C0E9142D2C9021F3000B2E90 /* NavigationRouterDestinationTestsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9142C2C9021F3000B2E90 /* NavigationRouterDestinationTestsTests.swift */; };
@@ -38,7 +37,6 @@
 		C0E914162C9021F2000B2E90 /* NavigationRouterDestinationTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NavigationRouterDestinationTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0E914192C9021F2000B2E90 /* NavigationRouterDestinationTestsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouterDestinationTestsApp.swift; sourceTree = "<group>"; };
 		C0E9141B2C9021F2000B2E90 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		C0E9141D2C9021F2000B2E90 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		C0E9141F2C9021F3000B2E90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C0E914222C9021F3000B2E90 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C0E914282C9021F3000B2E90 /* NavigationRouterDestinationTestsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NavigationRouterDestinationTestsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,7 +96,6 @@
 			children = (
 				C0E914192C9021F2000B2E90 /* NavigationRouterDestinationTestsApp.swift */,
 				C0E9141B2C9021F2000B2E90 /* ContentView.swift */,
-				C0E9141D2C9021F2000B2E90 /* Item.swift */,
 				C0E9141F2C9021F3000B2E90 /* Assets.xcassets */,
 				C0E914212C9021F3000B2E90 /* Preview Content */,
 			);
@@ -261,7 +258,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0E9141C2C9021F2000B2E90 /* ContentView.swift in Sources */,
-				C0E9141E2C9021F2000B2E90 /* Item.swift in Sources */,
 				C0E9141A2C9021F2000B2E90 /* NavigationRouterDestinationTestsApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

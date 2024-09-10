@@ -12,20 +12,23 @@ struct ContentView: View {
 
     @Environment(RouterPath.self) private var routerPath
 
-    @State var pageTitle: String
-    @State var pageDescription: String
-    @State var backgroundColor: Color
+    var pageTitle: String
+    var pageDescription: String
+    var backgroundColor: Color
 
     var body: some View {
         ZStack {
             backgroundColor
             VStack(spacing: 18) {
                 VStack {
-                    Text("Page: \(pageTitle)")
-                    Text("Nice Color Pick. I like \(pageDescription), too!")
+                    Text(pageTitle)
+                    Text(pageDescription)
+                    if let previousPageTitle = routerPath.previousPage?.title {
+                        Text("I came from the \(previousPageTitle)")
+                    }
 
                     Button {
-                         // Implment sheet
+                        // Implment sheet
                     } label: {
                         Text("Show Sheet")
                     }
@@ -33,7 +36,7 @@ struct ContentView: View {
                 }
 
                 HStack {
-                    ForEach(RouterDestination.allCases) { destination in
+                    ForEach(RouterDestination.allSetCases) { destination in
                         Button {
                             routerPath.navigate(to: destination)
                         } label: {
@@ -49,6 +52,22 @@ struct ContentView: View {
                         .frame(height: 30)
                     }
                 }
+
+                Button {
+                    routerPath.navigate(to: .customPage(color: Color.random, description: String.random(length: 5)))
+                } label: {
+                    Text("Click Here To Go To Custom")
+                        .foregroundStyle(.white)
+                        .font(.caption)
+                        .padding([.vertical], 2)
+                        .fontWeight(.bold)
+                }
+                .buttonStyle(.bordered)
+                .background(Color.pink)
+                .clipShape(RoundedRectangle(cornerRadius: 5))
+                .frame(height: 30)
+
+
                 Button {
                     routerPath.popToRoot()
                 } label: {
@@ -64,6 +83,7 @@ struct ContentView: View {
                 .frame(height: 30)
             }
         }
+        .ignoresSafeArea()
     }
 }
 
@@ -71,8 +91,8 @@ struct ContentView: View {
     Tab()
 }
 
-enum RouterDestination: Identifiable, Hashable, CaseIterable {
-    static var allCases = [Self.redPage,
+enum RouterDestination: Identifiable, Hashable {
+    static var allSetCases = [Self.redPage,
                            Self.bluePage,
                            Self.yellowPage,
                            Self.greenPage]
@@ -81,7 +101,7 @@ enum RouterDestination: Identifiable, Hashable, CaseIterable {
     case bluePage
     case yellowPage
     case greenPage
-//    case customPage(color: Color)
+    case customPage(color: Color, description: String)
 
     var id: String {
         title
@@ -97,8 +117,23 @@ enum RouterDestination: Identifiable, Hashable, CaseIterable {
             "Yello Page"
         case .greenPage:
             "Green Page"
-//        case .customPage(_):
-//            "Custom Color"
+        case .customPage:
+            "Custom Color"
+        }
+    }
+
+    var description: String {
+        switch self {
+        case .redPage:
+            "Red Page Description"
+        case .bluePage:
+            "Blue Page Description"
+        case .yellowPage:
+            "Yello Page Description"
+        case .greenPage:
+            "Green Page Description"
+        case .customPage(_, let description):
+            description
         }
     }
 
@@ -112,8 +147,8 @@ enum RouterDestination: Identifiable, Hashable, CaseIterable {
                 .yellow
         case .greenPage:
                 .green
-//        case .customPage(color: let color):
-//            color
+        case .customPage(color: let color, _):
+            color
         }
     }
 }
@@ -121,18 +156,23 @@ enum RouterDestination: Identifiable, Hashable, CaseIterable {
 @MainActor
 @Observable public class RouterPath {
 
-    var path: [RouterDestination] = []
+    var path: [RouterDestination] = [] {
+        didSet {
+            previousPage = path.last
+        }
+    }
+    var previousPage: RouterDestination?
 
     nonisolated init() {}
 
     func navigate(to: RouterDestination) {
-      path.append(to)
+        path.append(to)
     }
 
     func popToRoot() {
         path = []
+        previousPage = nil
     }
-
 }
 
 @MainActor
@@ -142,9 +182,9 @@ struct Tab: View {
     var body: some View {
         NavigationStack(path: $routerPath.path) {
             ContentView(
-                pageTitle: "Init", 
-                pageDescription: "Init Tab",
-                backgroundColor: .white
+                pageTitle: "Init",
+                pageDescription: "Init",
+                backgroundColor: .orange
             )
             .withAppRouter()
         }.environment(routerPath)
@@ -157,5 +197,29 @@ extension View {
         navigationDestination(for: RouterDestination.self) { destination in
             createView(destination: destination)
         }
+    }
+}
+
+extension View {
+    @ViewBuilder
+    func createView(destination: RouterDestination) -> some View {
+        ContentView(
+            pageTitle: destination.title,
+            pageDescription: destination.description,
+            backgroundColor: destination.color
+        )
+        .navigationTitle(destination.title)
+    }
+}
+
+extension Color {
+    static var random: Color {
+        return [.red, .yellow, .blue, .cyan, .purple, .pink, .orange].randomElement()!
+    }
+}
+
+extension String {
+    static func random(length: Int, using characters: String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789") -> String {
+        return (0..<length).map { _ in characters.randomElement()!.lowercased() }.joined()
     }
 }

@@ -11,21 +11,13 @@ import Observation
 
 @main
 struct NavigationRouterDestinationTestsApp: App {
-
     var body: some Scene {
         WindowGroup {
-            Tab()
-        }
-    }
-}
+//            TabView {
+                Tab()
 
-extension View {
-    @ViewBuilder
-    func createView(destination: RouterDestination) -> some View {
-        ContentView(
-            pageTitle: destination.title, 
-            pageDescription: "Wow",
-            backgroundColor: destination.color
-        )
+//                    .tabItem {  Label("Tab", systemImage: "circle") }
+//            }
+        }
     }
 }
