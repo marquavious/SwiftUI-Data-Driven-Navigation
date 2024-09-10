@@ -7,26 +7,25 @@
 
 import SwiftUI
 import SwiftData
+import Observation
 
 @main
 struct NavigationRouterDestinationTestsApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Tab()
         }
-        .modelContainer(sharedModelContainer)
+    }
+}
+
+extension View {
+    @ViewBuilder
+    func createView(destination: RouterDestination) -> some View {
+        ContentView(
+            pageTitle: destination.title, 
+            pageDescription: "Wow",
+            backgroundColor: destination.color
+        )
     }
 }
