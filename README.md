@@ -1,4 +1,4 @@
 # Data Drive Navigation in SwiftUI.
-It is a simple project to learn how to navigate Swift UI more efficiently. 
+A simple project to master navigating Swift UI more efficiently using Enviorment and routers. 
 
 ![](COLOR.gif)
