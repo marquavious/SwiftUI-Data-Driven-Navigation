@@ -9,69 +9,73 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-
     @Environment(RouterPath.self) private var routerPath
+    @Environment(ColorManager.self) var colorManager
 
-    var pageTitle: String
-    var pageDescription: String
-    var backgroundColor: Color
+    @State var pageTitle: String = "Select Color"
+    @State var pageDescription: String = "Page description will go here..."
+    @State var previousPageText: String = ""
+    @State var selectedColor: Color = .white
+    @State var randomColorButtonColor: Color = Color.random()
+    @State var shouldShowPopToRootButton: Bool = false
+    @State var isNewColor: Bool = false
 
     var body: some View {
         ZStack {
-            backgroundColor
+            selectedColor
+                .ignoresSafeArea()
             VStack(spacing: 18) {
-                VStack {
-                    Text(pageTitle)
-                    Text(pageDescription)
-                    if let previousPageTitle = routerPath.previousPage?.title {
-                        Text("I came from the \(previousPageTitle)")
-                    }
-
-                    Button {
-                        // Implment sheet
-                    } label: {
-                        Text("Show Sheet")
-                    }
-                    .buttonStyle(.bordered)
+                Button {
+                    routerPath.sheet = .colorSheet(color: selectedColor, colorName: pageTitle)
+                } label: {
+                    Text("Show Sheet")
+                        .fontWeight(.semibold)
                 }
+                .buttonStyle(.bordered)
 
                 HStack {
-                    ForEach(RouterDestination.allSetCases) { destination in
+                    ForEach(colorManager.colors.prefix(4)) { colorObject in
                         Button {
-                            routerPath.navigate(to: destination)
+                            routerPath.navigate(to: .colorPage(colorObject: colorObject))
                         } label: {
-                            Text(destination.title)
+                            Text("\(colorObject.title) Page")
                                 .foregroundStyle(.white)
                                 .font(.caption)
                                 .padding([.vertical], 2)
-                                .fontWeight(.bold)
+                                .fontWeight(.semibold)
                         }
                         .buttonStyle(.bordered)
-                        .background(destination.color)
+                        .background(colorObject.color)
                         .clipShape(RoundedRectangle(cornerRadius: 5))
                         .frame(height: 30)
                     }
                 }
 
                 Button {
-                    routerPath.navigate(to: .customPage(color: Color.random, description: String.random(length: 5)))
+                    let newColorObject = ColorObject(
+                        id: UUID().uuidString,
+                        title: String.random(length: 5),
+                        description: "HERE IS A CUSTOM COLOR !",
+                        color: randomColorButtonColor
+                    )
+                    colorManager.addColor(coclorObject: newColorObject)
+                    routerPath.navigate(to: .colorPage(colorObject: newColorObject, isNewColor: true))
                 } label: {
-                    Text("Click Here To Go To Custom")
+                    Text("Click here to make a New Color 👀")
                         .foregroundStyle(.white)
                         .font(.caption)
                         .padding([.vertical], 2)
                         .fontWeight(.bold)
                 }
                 .buttonStyle(.bordered)
-                .background(Color.pink)
+                .background(randomColorButtonColor)
                 .clipShape(RoundedRectangle(cornerRadius: 5))
                 .frame(height: 30)
-
 
                 Button {
                     routerPath.popToRoot()
                 } label: {
-                    Text("Click Here To Pop To Root")
+                    Text("Pop To Root")
                         .foregroundStyle(.white)
                         .font(.caption)
                         .padding([.vertical], 2)
@@ -81,145 +85,40 @@ struct ContentView: View {
                 .background(Color.pink)
                 .clipShape(RoundedRectangle(cornerRadius: 5))
                 .frame(height: 30)
+                .opacity(shouldShowPopToRootButton ? 1 : 0)
+
+                ComponentsSquares { colorObject in
+                    routerPath.navigate(to: .colorPage(colorObject: colorObject))
+                }
             }
         }
-        .ignoresSafeArea()
+        .overlay(alignment: .topLeading) {
+            VStack(alignment: .leading) {
+                Text(pageDescription)
+                Text(previousPageText)
+            }
+            .italic()
+            .fontWeight(.bold)
+            .foregroundColor(.white)
+            .padding([.horizontal], 16)
+        }
+        .onAppear {
+            if let previousPage = routerPath.previousPage {
+                switch previousPage {
+                case .colorPage(colorObject: let colorObject, _):
+                    previousPageText = "...I came from the \(colorObject.title) Page..."
+                }
+            }
+            shouldShowPopToRootButton = !routerPath.path.isEmpty
+            UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
+        }
+        .navigationTitle(isNewColor ? "✨ \(pageTitle) ✨" : pageTitle)
+        .toolbarRole(.editor)
     }
 }
 
 #Preview {
-    Tab()
+    Tab().environment(ColorManager())
 }
 
-enum RouterDestination: Identifiable, Hashable {
-    static var allSetCases = [Self.redPage,
-                           Self.bluePage,
-                           Self.yellowPage,
-                           Self.greenPage]
-
-    case redPage
-    case bluePage
-    case yellowPage
-    case greenPage
-    case customPage(color: Color, description: String)
-
-    var id: String {
-        title
-    }
-
-    var title: String {
-        switch self {
-        case .redPage:
-            "Red Page"
-        case .bluePage:
-            "Blue Page"
-        case .yellowPage:
-            "Yello Page"
-        case .greenPage:
-            "Green Page"
-        case .customPage:
-            "Custom Color"
-        }
-    }
-
-    var description: String {
-        switch self {
-        case .redPage:
-            "Red Page Description"
-        case .bluePage:
-            "Blue Page Description"
-        case .yellowPage:
-            "Yello Page Description"
-        case .greenPage:
-            "Green Page Description"
-        case .customPage(_, let description):
-            description
-        }
-    }
-
-    var color: Color {
-        switch self {
-        case .redPage:
-                .red
-        case .bluePage:
-                .blue
-        case .yellowPage:
-                .yellow
-        case .greenPage:
-                .green
-        case .customPage(color: let color, _):
-            color
-        }
-    }
-}
-
-@MainActor
-@Observable public class RouterPath {
-
-    var path: [RouterDestination] = [] {
-        didSet {
-            previousPage = path.last
-        }
-    }
-    var previousPage: RouterDestination?
-
-    nonisolated init() {}
-
-    func navigate(to: RouterDestination) {
-        path.append(to)
-    }
-
-    func popToRoot() {
-        path = []
-        previousPage = nil
-    }
-}
-
-@MainActor
-struct Tab: View {
-    @State var routerPath = RouterPath()
-
-    var body: some View {
-        NavigationStack(path: $routerPath.path) {
-            ContentView(
-                pageTitle: "Init",
-                pageDescription: "Init",
-                backgroundColor: .orange
-            )
-            .withAppRouter()
-        }.environment(routerPath)
-    }
-}
-
-@MainActor
-extension View {
-    func withAppRouter() -> some View {
-        navigationDestination(for: RouterDestination.self) { destination in
-            createView(destination: destination)
-        }
-    }
-}
-
-extension View {
-    @ViewBuilder
-    func createView(destination: RouterDestination) -> some View {
-        ContentView(
-            pageTitle: destination.title,
-            pageDescription: destination.description,
-            backgroundColor: destination.color
-        )
-        .navigationTitle(destination.title)
-    }
-}
-
-extension Color {
-    static var random: Color {
-        return [.red, .yellow, .blue, .cyan, .purple, .pink, .orange].randomElement()!
-    }
-}
-
-extension String {
-    static func random(length: Int, using characters: String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789") -> String {
-        return (0..<length).map { _ in characters.randomElement()!.lowercased() }.joined()
-    }
-}

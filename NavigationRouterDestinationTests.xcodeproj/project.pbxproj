@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C073B8C42C913C57007A5395 /* ColorObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073B8C32C913C57007A5395 /* ColorObject.swift */; };
+		C073B8C62C913C73007A5395 /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073B8C52C913C73007A5395 /* ColorManager.swift */; };
+		C073B8C92C913C8B007A5395 /* SheetDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073B8C82C913C8B007A5395 /* SheetDestination.swift */; };
+		C073B8CB2C913CA5007A5395 /* RouterDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073B8CA2C913CA5007A5395 /* RouterDestination.swift */; };
+		C073B8CD2C913CB7007A5395 /* RouterPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073B8CC2C913CB7007A5395 /* RouterPath.swift */; };
+		C073B8CF2C913CCA007A5395 /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073B8CE2C913CCA007A5395 /* View+Ext.swift */; };
+		C073B8D12C913CE7007A5395 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073B8D02C913CE7007A5395 /* String+Ext.swift */; };
+		C073B8D32C913CF8007A5395 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073B8D22C913CF8007A5395 /* Color.swift */; };
+		C073B8D52C913D09007A5395 /* CGFloat+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073B8D42C913D09007A5395 /* CGFloat+Ext.swift */; };
+		C073B8D72C913D15007A5395 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073B8D62C913D15007A5395 /* Tab.swift */; };
+		C073B8D92C913D30007A5395 /* ComponentsSquares.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073B8D82C913D30007A5395 /* ComponentsSquares.swift */; };
 		C0E9141A2C9021F2000B2E90 /* NavigationRouterDestinationTestsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E914192C9021F2000B2E90 /* NavigationRouterDestinationTestsApp.swift */; };
 		C0E9141C2C9021F2000B2E90 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9141B2C9021F2000B2E90 /* ContentView.swift */; };
 		C0E914202C9021F3000B2E90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0E9141F2C9021F3000B2E90 /* Assets.xcassets */; };
@@ -34,6 +45,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C073B8C32C913C57007A5395 /* ColorObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorObject.swift; sourceTree = "<group>"; };
+		C073B8C52C913C73007A5395 /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
+		C073B8C82C913C8B007A5395 /* SheetDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetDestination.swift; sourceTree = "<group>"; };
+		C073B8CA2C913CA5007A5395 /* RouterDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterDestination.swift; sourceTree = "<group>"; };
+		C073B8CC2C913CB7007A5395 /* RouterPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterPath.swift; sourceTree = "<group>"; };
+		C073B8CE2C913CCA007A5395 /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
+		C073B8D02C913CE7007A5395 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		C073B8D22C913CF8007A5395 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		C073B8D42C913D09007A5395 /* CGFloat+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Ext.swift"; sourceTree = "<group>"; };
+		C073B8D62C913D15007A5395 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		C073B8D82C913D30007A5395 /* ComponentsSquares.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentsSquares.swift; sourceTree = "<group>"; };
 		C0E914162C9021F2000B2E90 /* NavigationRouterDestinationTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NavigationRouterDestinationTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0E914192C9021F2000B2E90 /* NavigationRouterDestinationTestsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouterDestinationTestsApp.swift; sourceTree = "<group>"; };
 		C0E9141B2C9021F2000B2E90 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -96,6 +118,17 @@
 			children = (
 				C0E914192C9021F2000B2E90 /* NavigationRouterDestinationTestsApp.swift */,
 				C0E9141B2C9021F2000B2E90 /* ContentView.swift */,
+				C073B8D22C913CF8007A5395 /* Color.swift */,
+				C073B8D02C913CE7007A5395 /* String+Ext.swift */,
+				C073B8D82C913D30007A5395 /* ComponentsSquares.swift */,
+				C073B8CE2C913CCA007A5395 /* View+Ext.swift */,
+				C073B8D62C913D15007A5395 /* Tab.swift */,
+				C073B8D42C913D09007A5395 /* CGFloat+Ext.swift */,
+				C073B8CC2C913CB7007A5395 /* RouterPath.swift */,
+				C073B8CA2C913CA5007A5395 /* RouterDestination.swift */,
+				C073B8C82C913C8B007A5395 /* SheetDestination.swift */,
+				C073B8C32C913C57007A5395 /* ColorObject.swift */,
+				C073B8C52C913C73007A5395 /* ColorManager.swift */,
 				C0E9141F2C9021F3000B2E90 /* Assets.xcassets */,
 				C0E914212C9021F3000B2E90 /* Preview Content */,
 			);
@@ -257,8 +290,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C073B8D12C913CE7007A5395 /* String+Ext.swift in Sources */,
+				C073B8CF2C913CCA007A5395 /* View+Ext.swift in Sources */,
 				C0E9141C2C9021F2000B2E90 /* ContentView.swift in Sources */,
+				C073B8D72C913D15007A5395 /* Tab.swift in Sources */,
+				C073B8D92C913D30007A5395 /* ComponentsSquares.swift in Sources */,
+				C073B8D52C913D09007A5395 /* CGFloat+Ext.swift in Sources */,
+				C073B8D32C913CF8007A5395 /* Color.swift in Sources */,
+				C073B8C42C913C57007A5395 /* ColorObject.swift in Sources */,
 				C0E9141A2C9021F2000B2E90 /* NavigationRouterDestinationTestsApp.swift in Sources */,
+				C073B8CD2C913CB7007A5395 /* RouterPath.swift in Sources */,
+				C073B8C62C913C73007A5395 /* ColorManager.swift in Sources */,
+				C073B8C92C913C8B007A5395 /* SheetDestination.swift in Sources */,
+				C073B8CB2C913CA5007A5395 /* RouterDestination.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

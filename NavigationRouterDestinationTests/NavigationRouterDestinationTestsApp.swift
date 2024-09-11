@@ -11,13 +11,11 @@ import Observation
 
 @main
 struct NavigationRouterDestinationTestsApp: App {
+    @State var colorManager = ColorManager()
+
     var body: some Scene {
         WindowGroup {
-//            TabView {
-                Tab()
-
-//                    .tabItem {  Label("Tab", systemImage: "circle") }
-//            }
+            Tab().environment(colorManager)
         }
     }
 }
