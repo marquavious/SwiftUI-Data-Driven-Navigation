@@ -24,7 +24,7 @@ struct ContentView: View {
         ZStack {
             selectedColor
                 .ignoresSafeArea()
-            VStack(spacing: 18) {
+            VStack(alignment: .center, spacing: 18) {
                 Button {
                     routerPath.sheet = .colorSheet(color: selectedColor, colorName: pageTitle)
                 } label: {
@@ -60,6 +60,7 @@ struct ContentView: View {
                     )
                     colorManager.addColor(coclorObject: newColorObject)
                     routerPath.navigate(to: .colorPage(colorObject: newColorObject, isNewColor: true))
+                    UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                 } label: {
                     Text("Click here to make a New Color 👀")
                         .foregroundStyle(.white)
@@ -89,7 +90,7 @@ struct ContentView: View {
 
                 ComponentsSquares { colorObject in
                     routerPath.navigate(to: .colorPage(colorObject: colorObject))
-                }
+                }.frame(maxWidth: UIScreen.main.bounds.width)
             }
         }
         .overlay(alignment: .topLeading) {
